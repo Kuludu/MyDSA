@@ -1,23 +1,34 @@
 #ifndef MyQueue_H_
 #define MyQueue_H_
+
+#ifndef _GLIBCXX_MEMORY
+#include <memory>
+#endif
+
 namespace MyQueueNamespace {
     template<class T>
     struct Element {
         T value;
-        Element* next = nullptr;
+        std::shared_ptr<Element> next =  nullptr;
+    };
+
+    class bad_pop : public std::exception {
+    public:
+        const std::string what() {
+            return "Can't pop element from an empty queue.";
+        }
     };
     
     template<class T>
     class MyQueue {
     public:
         MyQueue();
-        ~MyQueue();
-        bool push(const T &);
+        void push(const T &);
         bool pop();
         T front();
         T back();
     private:
-        Element<T> *front_element, *back_element;
+        std::shared_ptr<Element<T>> front_element, back_element;
     protected:
         unsigned int queue_size;
     };
@@ -35,61 +46,33 @@ namespace MyQueueNamespace {
     MyQueue<T>::MyQueue() {
         front_element = back_element;
     }
-    
-    template<class T>
-    MyQueue<T>::~MyQueue() {
-        try {
-            if ( queue_size ) {
-                while ( front_element != back_element ) {
-                        auto next_element = front_element->next;
-                        delete front_element;
-                        front_element = next_element;   
-                }
-
-                delete front_element;
-            }
-        } catch(const std::exception& e) {
-            std::cerr << e.what() << std::endl;
-        }
-    }
 
     template<class T>
-    bool MyQueue<T>::push(const T &x) {
-        try {
-            Element<T> *push_element = new Element<T>;
-            push_element->value = x;
-            if ( queue_size <= 0 )
-                front_element = back_element = push_element;
-            else if (queue_size == 1) {
-                back_element = push_element;
-                front_element->next = push_element;
-            } else {
-                back_element->next = push_element;
-                back_element = push_element;
-            }
-        } catch(const std::exception& e) {
-            std::cerr << e.what() << std::endl;
-            return false;
+    void MyQueue<T>::push(const T &x) {
+        std::shared_ptr<Element<T>> push_element(new Element<T>);
+        push_element->value = x;
+        if ( queue_size <= 0 )
+            front_element = back_element = push_element;
+        else if (queue_size == 1) {
+            back_element = push_element;
+            front_element->next = push_element;
+        } else {
+            back_element->next = push_element;
+            back_element = push_element;
         }
 
         ++queue_size;
-        return true;
     }
 
     template<class T>
     bool MyQueue<T>::pop() {
         try {
-            if ( queue_size == 2 ) {
-                delete front_element;
-                front_element = back_element;
-            } else if ( queue_size == 1 ) {
-                delete front_element;
-            } else {
-                auto next_element = front_element->next;
-                delete front_element;
-                front_element = next_element;
-            }
-        } catch(const std::exception& e) {
+            if ( queue_size <= 0 )
+                throw bad_pop();
+
+            auto next_element = front_element->next;
+            front_element = next_element;
+        } catch(bad_pop & e) {
             std::cerr << e.what() << std::endl;
             return false;
         }

@@ -29,6 +29,11 @@ int main() {
     if ( !bq->isempty() )
         cout << "bq is not empty." << endl;
 
+    bq->pop();
+    bq->pop();
+    bq->pop();
+    bq->pop();
+
     delete q;
     delete bq;
 
