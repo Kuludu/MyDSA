@@ -27,10 +27,9 @@ namespace MyQueueNamespace {
         bool pop();
         T front();
         T back();
-    private:
-        std::shared_ptr<Element<T>> front_element, back_element;
     protected:
-        unsigned int queue_size;
+        std::shared_ptr<Element<T>> front_element, back_element;
+        unsigned int queue_size = 0;
     };
 
     template<class T>
@@ -38,7 +37,12 @@ namespace MyQueueNamespace {
     public:
         unsigned int size() const;
         bool isempty() const;
+        MyBetterQueue() = default;
+        MyBetterQueue(MyBetterQueue<T> &&);
+        MyBetterQueue<T> operator+(const MyBetterQueue<T> &) const;
     private:
+        using MyQueue<T>::front_element;
+        using MyQueue<T>::back_element;
         using MyQueue<T>::queue_size;
     };
 
@@ -98,6 +102,15 @@ namespace MyQueueNamespace {
     }
 
     template<class T>
+    MyBetterQueue<T>::MyBetterQueue(MyBetterQueue && f) {
+        front_element = f.front_element;
+        back_element = f.back_element;
+        queue_size = f.queue_size;
+        f.front_element = nullptr;
+        f.back_element = nullptr;
+    }
+
+    template<class T>
     unsigned int MyBetterQueue<T>::size() const {
         return queue_size;
     }
@@ -112,6 +125,26 @@ namespace MyQueueNamespace {
         bq.push(x); 
         
         return bq;
+    }
+
+    template<class T>
+    MyBetterQueue<T> MyBetterQueue<T>::operator+(const MyBetterQueue<T> &x) const {
+        MyBetterQueue<T> temp;
+        if ( !this->isempty() ) {
+            for ( auto ptr = this->front_element; ptr != this->back_element; ptr = ptr->next)
+                temp.push(ptr->value);
+
+            temp.push(this->back_element->value);
+        }
+        
+        if ( !x.isempty() ) {
+            for ( auto ptr = x.front_element; ptr != x.back_element; ptr = ptr->next)
+                temp.push(ptr->value);
+
+            temp.push(x.back_element->value);
+        }
+
+        return temp;
     }
 }
 #endif

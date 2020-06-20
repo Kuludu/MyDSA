@@ -1,7 +1,9 @@
 #include <iostream>
+#include <typeinfo>
 #include "MyQueue.hpp"
 using std::cout;
 using std::endl;
+using std::move;
 using namespace MyQueueNamespace;
 
 int main() {
@@ -36,6 +38,19 @@ int main() {
 
     delete q;
     delete bq;
+
+    cout << "Example of move semantics." << endl;
+    MyBetterQueue<int> a;
+    a << 1 << 2 << 3;
+    MyBetterQueue<int> b;
+    b << 4 << 5 << 6;
+    cout << typeid(a + b).name() << endl;
+    MyBetterQueue<int> c = move(a + b);
+    while ( !c.isempty() ) {
+        cout << c.front() << ' ';
+        c.pop();
+    }
+    cout << endl;
 
     return 0;
 }
