@@ -1,7 +1,11 @@
 # MyADT
-A simple implement of some data structures.
+Simple implements of some ADTs.
 
-* StackADT : Stack implement (C++)
-* QueueADT : Queue implement (C++)
-* BinarySearchTreeADT : Binary Search Tree implement (Go)
-
+* Linear List : 
+  * Sequential List (C++)
+* Stack : 
+  * Stack (C++)
+* Queue : 
+  * Queue (C++)
+* BinarySearchTree :
+  * BinarySearchTree (Go)
