@@ -9,5 +9,5 @@ Simple implements of some ADTs.
   * Stack (C++)
 * Queue : 
   * Queue (C++)
-* BinarySearchTree :
+* Tree :
   * BinarySearchTree (Go)
