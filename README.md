@@ -13,3 +13,5 @@ Simple implements of some ADTs.
   * BinarySearchTree (Go)
 * Graph
   * Graph (C++)
+* String
+  * String (C++)
