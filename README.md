@@ -11,6 +11,7 @@ Simple implements of some ADTs.
   * Queue (C++)
 * Tree :
   * BinarySearchTree (Go)
+    * AVL (C)
 * Graph
   * Graph (C++)
 * String
