@@ -1,5 +1,5 @@
-# MyADT
-Simple implements of some ADTs.
+# MyDSA
+Simple implements of some DSA(Data Structure and Algorithm).
 
 * Linear List : 
   * Sequential List (C++)
