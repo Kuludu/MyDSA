@@ -16,3 +16,5 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Graph (C++)
 * String
   * String (C++)
+* Sort
+  * Quick Sort (C++)
