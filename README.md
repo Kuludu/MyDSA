@@ -18,3 +18,4 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * String (C++)
 * Sort
   * Quick Sort (C++)
+  * Merge Sort (C++)
