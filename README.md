@@ -19,6 +19,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
 * Sort
   * Quick Sort (C++)
   * Merge Sort (C++)
+  * Heap Sort (C++)
 * MST
   * Kurskal (C++)
   * Prim (C++)
