@@ -25,3 +25,4 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Prim (C++)
 * Dynamic Programming
   * Longest Common Subsequence (C++)
+  * Longest Palindrome (C++)
