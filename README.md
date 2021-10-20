@@ -26,3 +26,4 @@ Simple implements of some DSA(Data Structure and Algorithm).
 * Dynamic Programming
   * Longest Common Subsequence (C++)
   * Longest Palindrome (C++)
+  * Longest Increase Sequence (C++)
