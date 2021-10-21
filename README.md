@@ -20,10 +20,11 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Quick Sort (C++)
   * Merge Sort (C++)
   * Heap Sort (C++)
-* MST
+* Minimum Spanning Tree
   * Kurskal (C++)
   * Prim (C++)
 * Dynamic Programming
   * Longest Common Subsequence (C++)
   * Longest Palindrome (C++)
   * Longest Increase Sequence (C++)
+  * 0-1 Knapsack (C++)
