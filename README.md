@@ -12,6 +12,9 @@ Simple implements of some DSA(Data Structure and Algorithm).
 * Tree :
   * BinarySearchTree (Go)
     * AVL (C)
+  * Minimum Spanning Tree
+    * Kurskal (C++)
+    * Prim (C++)
 * Graph
   * Graph (C++)
 * String
@@ -20,9 +23,6 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Quick Sort (C++)
   * Merge Sort (C++)
   * Heap Sort (C++)
-* Minimum Spanning Tree
-  * Kurskal (C++)
-  * Prim (C++)
 * Dynamic Programming
   * Longest Common Subsequence (C++)
   * Longest Palindrome (C++)
