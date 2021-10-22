@@ -1,22 +1,22 @@
 # MyDSA
 Simple implements of some DSA(Data Structure and Algorithm).
 
-* Linear List : 
+* Linear List
   * Sequential List (C++)
   * Single Linked List (C++)
   * Double Linked List (C++)
-* Stack : 
+* Stack
   * Stack (C++)
-* Queue : 
+* Queue
   * Queue (C++)
-* Tree :
-  * BinarySearchTree (Go)
-    * AVL (C)
+* Graph
+  * Graph (C++)
+  * Tree
+    * BinarySearchTree (Go)
+      * AVL (C)
   * Minimum Spanning Tree
     * Kurskal (C++)
     * Prim (C++)
-* Graph
-  * Graph (C++)
 * String
   * String (C++)
 * Sort
