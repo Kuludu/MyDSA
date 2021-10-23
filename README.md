@@ -17,6 +17,8 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Minimum Spanning Tree
     * Kurskal (C++)
     * Prim (C++)
+  * Shortest Path
+    * Floyd (C++)
 * String
   * String (C++)
 * Sort
