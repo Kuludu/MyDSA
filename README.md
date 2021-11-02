@@ -19,6 +19,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
     * Prim (C++)
   * Shortest Path
     * Floyd (C++)
+    * Dijkstra (C++)
 * String
   * String (C++)
 * Sort
