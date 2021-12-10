@@ -13,7 +13,7 @@ int main() {
     for (int i = 0; i < m; ++i) {
         cin >> u >> v >> w;
         G[u][v] = min(G[u][v], w);
-        G[v][u] = min(G[u][v], w);
+        G[v][u] = min(G[v][u], w);
     }
 
     int ans = 0, current = 1;
