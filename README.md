@@ -31,3 +31,5 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Longest Palindrome (C++)
   * Longest Increase Sequence (C++)
   * 0-1 Knapsack (C++)
+* Math
+  * Greatest Common Divisor (C++)
