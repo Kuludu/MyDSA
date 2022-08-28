@@ -33,3 +33,4 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * 0-1 Knapsack (C++)
 * Math
   * Greatest Common Divisor (C++)
+  * Least Common Multiple (C++)
