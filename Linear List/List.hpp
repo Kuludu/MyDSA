@@ -4,7 +4,11 @@
 template<class T>
 class List {
 public:
+    virtual bool isEmpty() = 0;
+
     virtual bool insertElement(T, int) = 0;
+
+    virtual bool appendElement(T) = 0;
 
     virtual bool deleteElement(int) = 0;
 
