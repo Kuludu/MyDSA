@@ -5,6 +5,7 @@ int main(int argc, char** argv) {
     auto lruMemoryControl = std::make_shared<LRUMemoryControl>(4);
     
     lruMemoryControl->put(1, std::move(1));
+    lruMemoryControl->put(1, std::move(2));
     lruMemoryControl->put(2, std::move(1));
     lruMemoryControl->put(3, std::move(1));
     lruMemoryControl->get(10);
