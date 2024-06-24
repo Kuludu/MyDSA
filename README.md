@@ -14,6 +14,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Tree
     * Binary Search Tree (Go)
       * Adelson-Velsky and Landis Tree (C)
+  * Disjoint Set (C++)
   * Minimum Spanning Tree
     * Kurskal (C++)
     * Prim (C++)
