@@ -43,3 +43,4 @@ Simple implements of some DSA(Data Structure and Algorithm).
     * Producer Consumer (C++)
 * Design Pattern
   * Singleton (C++)
+  * Observer (C++)
