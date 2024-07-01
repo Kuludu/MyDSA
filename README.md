@@ -44,3 +44,4 @@ Simple implements of some DSA(Data Structure and Algorithm).
 * Design Pattern
   * Singleton (C++)
   * Observer (C++)
+  * Decorator (C++)
