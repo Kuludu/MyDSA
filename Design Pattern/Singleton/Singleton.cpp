@@ -8,6 +8,8 @@ private:
         std::lock_guard<std::mutex> lock(mtx);
         std::cout << "Singleton created." << std::endl;
     }
+    Singleton(const Singleton&) = delete; // delete copy constructor
+    const Singleton& operator=(const Singleton&) = delete; // delete copy assignment operator
 
 public:
     static Singleton* getInstance() {
