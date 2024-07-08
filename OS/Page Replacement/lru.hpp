@@ -12,75 +12,81 @@ using namespace SimuatedMemory;
 class LRUMemoryControl final : public AbstractMemeoryDevice {
 public:
     LRUMemoryControl(int max_cap) : AbstractMemeoryDevice(max_cap) {
-        head = tail = nullptr;
+        this->head = this->tail = nullptr;
     }
 
-    void get(int block_id) override {
-        std::cout << "Getting block " << block_id << "." << std::endl;
-        if (cache.find(block_id) != cache.end()) {
+    void get(int key) override {
+        std::cout << "Getting block " << key << "." << std::endl;
 
-            std::cout << "Cache found, the value is " << cache[block_id]->value << "." << std::endl;
-            return;
+        if (cache.count(key)) {
+            DLM *block = cache[key];
+            std::cout << "Block found in cache, the value is " << block->value << "." << std::endl;
+            this->moveToHead(block);
+        } else {
+            std::cout << "Block not found in cache." << std::endl;
         }
-
-        std::cout << "Cache not found." << std::endl;
     }
 
     void put(int key, int&& value) override {
         std::cout << "Setting block " << key << "." << std::endl;
 
-        if (cache.find(key) != cache.end()) {
+        if (cache.count(key)) {
+            DLM *block = cache[key];
             std::cout << "Block found in cache, updating value." << std::endl;
-            this->cache[key]->value = value;
-            this->move(key);
+            block->value = value;
+            moveToHead(block);
         } else {
             std::cout << "Block not found in cache, appending." << std::endl;
-            std::shared_ptr<DoubleLinkedMemoryBlock> new_block = std::make_shared<DoubleLinkedMemoryBlock>(key, value);
-            this->cache[key] = new_block;
-            this->append(new_block);
-
-            if (cache.size() > MAX_CAP) {
+            if (cache.size() >= MAX_CAP) {
                 std::cout << "Reaching maximum capacity, evicting." << std::endl;
-                int key = this->head->key;
-                this->head = this->head->next;
-                this->head->prev = nullptr;
-                cache.erase(key);
+                this->removeTail();
             }
+            DLM *block = new DLM(key, value);
+            cache[key] = block;
+            addToHead(block);
         }
     }
 private:
-    std::unordered_map<int, std::shared_ptr<SimuatedMemory::DoubleLinkedMemoryBlock>> cache;
-    std::shared_ptr<SimuatedMemory::DoubleLinkedMemoryBlock> head, tail;
+    using DLM = SimuatedMemory::DoubleLinkedMemoryBlock;
+    std::unordered_map<int, DLM*> cache;
+    DLM *head, *tail;
 
-    void move(int key) {
-        auto block = this->cache[key];
-        if (this->head == block) {
-            if (this->head->next != nullptr) {
-                this->head = this->head->next;
-                this->head->prev = nullptr;
-
-                this->tail->next = block;
-                block->prev = this->tail;
-                block->next = nullptr;
-            }
+    void addToHead(DLM *x) {
+        if (head == nullptr) {
+            head = tail = x;
         } else {
-            block->prev->next = block->next;
-            block->next->prev = block->prev;
-
-            this->tail->next = block;
-            block->prev = this->tail;
-            block->next = nullptr;
-            this->tail = block;
+            x->next = head;
+            head->prev = x;
+            head = x;
         }
     }
 
-    void append(std::shared_ptr<DoubleLinkedMemoryBlock> block) {
-        if (this->head == nullptr) {
-            this->head = this->tail = block;
-        } else {
-            this->tail->next = block;
-            block->prev = this->tail;
-            this->tail = block;
+    void moveToHead(DLM *x) {
+        if (x != head) {
+            x->prev->next = x->next;
+            if (x == this->tail)
+                this->tail = x->prev;
+            else
+                x->next->prev = x->prev;
+            x->next = head;
+            x->prev = nullptr;
+            head->prev = x;
+            head = x;
+        }
+    }
+
+    void removeTail() {
+        if (tail != nullptr) {
+            DLM *tmp = tail;
+            std::cout << "Evicting block " << tmp->key << "." << std::endl;
+            tail = tail->prev;
+            if (tail != nullptr) {
+                tail->next = nullptr;
+            } else {
+                head = nullptr;
+            }
+            cache.erase(tmp->key);
+            delete tmp;
         }
     }
 };
