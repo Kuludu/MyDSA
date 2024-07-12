@@ -5,7 +5,7 @@
 #include <functional>
 #endif
 
-std::function<int(int, int)> gcd = [](int a, int b) -> int {
+auto gcd = [](auto& a, auto& b) -> int {
         return b ? gcd(b, a % b) : a;
     };
 
