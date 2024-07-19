@@ -45,3 +45,4 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Singleton (C++)
   * Observer (C++)
   * Decorator (C++)
+  * Strategy (C++)
