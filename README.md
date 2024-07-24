@@ -21,6 +21,8 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Shortest Path
     * Floyd (C++)
     * Dijkstra (C++)
+  * Topo Sort
+    * Kahn (C++)
 * String
   * String (C++)
 * Sort
