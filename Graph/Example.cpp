@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 int main() {
-    cout << "An example of MyTree class." << endl;
+    cout << "An example of MyGraph class." << endl;
 
     MyGraph<int> *graph = new MyGraph<int>;
     graph->create_vertex(1, 1);
