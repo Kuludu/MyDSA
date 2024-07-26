@@ -16,6 +16,7 @@ namespace MyTreeNamespace {
     struct Node {
         T value;
         std::shared_ptr<Node> left_son, right_son;
+        Node(T value) : value(value) {}
     };
     
     template<class T>
@@ -23,11 +24,14 @@ namespace MyTreeNamespace {
     public:
         void add_node(std::shared_ptr<Node<T>> &, const T &);
         void in_order_print();
+        int get_diameter();
         std::shared_ptr<Node<T>> root;
     private:
+        int diameter = -1;
         void on_in_order_print(const std::shared_ptr<Node<T>> &);
         void on_print(const std::shared_ptr<Node<T>> &);
         void on_build(std::shared_ptr<Node<T>> &, const T &);
+        int on_get_diameter(const std::shared_ptr<Node<T>> &);
     };
 
     template<class T>
@@ -56,8 +60,7 @@ namespace MyTreeNamespace {
 
     template<class T>
     void MyTree<T>::on_build(std::shared_ptr<Node<T>> &node, const T &value) {
-        node = std::make_shared<Node<T>>();
-        node->value = value;
+        node = std::make_shared<Node<T>>(value);
     }
 }
 
