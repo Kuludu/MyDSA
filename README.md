@@ -29,6 +29,9 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Quick Sort (C++)
   * Merge Sort (C++)
   * Heap Sort (C++)
+* Search
+  * Lower Bound (C++)
+  * Upper Bound (C++)
 * Dynamic Programming
   * Longest Common Subsequence (C++)
   * Longest Palindrome (C++)
