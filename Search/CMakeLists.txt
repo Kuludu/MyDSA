@@ -11,3 +11,7 @@ add_compile_options(
 )
 
 enable_testing()
+add_executable(test_lower_bound test_lower_bound.cpp)
+add_test(NAME test_lower_bound COMMAND test_lower_bound)
+add_executable(test_upper_bound test_upper_bound.cpp)
+add_test(NAME test_upper_bound COMMAND test_upper_bound)
