@@ -41,6 +41,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Greatest Common Divisor (C++)
   * Least Common Multiple (C++)
   * Fibonacci (C++)
+  * Square Root (C++)
 * OS
   * Page Replacement
     * LRU (C++)
