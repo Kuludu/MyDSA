@@ -29,6 +29,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Quick Sort (C++)
   * Merge Sort (C++)
   * Heap Sort (C++)
+  * Bubble Sort (C++)
 * Search
   * Lower Bound (C++)
   * Upper Bound (C++)
