@@ -25,6 +25,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
     * Kahn (C++)
 * String
   * String (C++)
+  * Trie (C++)
 * Sort
   * Quick Sort (C++)
   * Merge Sort (C++)
