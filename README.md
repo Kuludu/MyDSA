@@ -47,6 +47,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
 * OS
   * Page Replacement
     * LRU (C++)
+    * LFU (C++)
   * Process & Thread
     * Producer Consumer (C++)
     * Thread Pool (C++)
