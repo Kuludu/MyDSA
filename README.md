@@ -45,6 +45,8 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Fibonacci (C++)
   * Square Root (C++)
 * OS
+  * Pointer
+    * Shared Pointer (C++)
   * Page Replacement
     * LRU (C++)
     * LFU (C++)
