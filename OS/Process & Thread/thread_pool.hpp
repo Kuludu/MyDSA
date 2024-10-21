@@ -1,58 +1,99 @@
 #pragma once
 
+#include <algorithm>
 #include <iostream>
+#include <stdexcept>
 #include <vector>
 #include <queue>
 #include <thread>
-#include <chrono>
 #include <mutex>
 #include <condition_variable>
 #include <functional>
-#include <atomic>
+#include <future>
+#include <chrono>
+#include <memory>
 
 class ThreadPool {
 public:
-    ThreadPool(size_t num_threads) : stop(false) {
-         for(size_t i = 0; i < num_threads; ++i) {
+    using Task = std::function<void()>;
+
+    explicit ThreadPool(size_t num_core_threads, size_t num_max_threads, std::chrono::milliseconds idle_time)
+        : num_core_threads(num_core_threads), num_max_threads(num_max_threads), idle_time(idle_time) {
+         for(size_t i = 0; i < num_core_threads; ++i) {
             workers.emplace_back(&ThreadPool::worker, this);
         }
     }
 
     virtual ~ThreadPool() {
-        stop = true;
-        cv.notify_all();
+        {
+            std::unique_lock<std::mutex> lock(event_mutex);
+            stop = true;
+        }
+        event_variable.notify_all();
         for(auto &worker : workers) {
-            worker.join();
+            if (worker.joinable()) {
+                worker.join();
+            }
         }
     }
 
-    void enqueue(std::function<void()> task) {
+    template<class T>
+    auto enqueue(T task) -> std::future<decltype(task())> {
+        auto wrapper = std::make_shared<std::packaged_task<decltype(task())()>>(std::move(task)); 
         {
-            std::unique_lock<std::mutex> lock(queue_mutex);
-            tasks.push(std::move(task));
+            std::unique_lock<std::mutex> lock(event_mutex);
+            if (stop) {
+                throw std::runtime_error("Enqueue on stopped ThreadPool.");
+            }
+
+            tasks.emplace([=] {
+                (*wrapper)();
+            });
+
+            if (workers.size() < num_max_threads && tasks.size() > workers.size()) {
+                workers.emplace_back(&ThreadPool::worker, this);
+            }
         }
-        cv.notify_one();
+        event_variable.notify_one();
+
+        return wrapper->get_future();
     }
 
 private:
-    std::vector<std::thread> workers;
-    std::queue<std::function<void()>> tasks;
+    size_t num_core_threads;
+    size_t num_max_threads;
+    std::chrono::milliseconds idle_time;
 
-    std::mutex queue_mutex;
-    std::condition_variable cv;
-    std::atomic<bool> stop;
+    std::vector<std::thread> workers;
+    std::queue<Task> tasks;
+    std::mutex event_mutex;
+    std::condition_variable event_variable;
+    bool stop = false;
 
     void worker() {
          while(true) {
-            std::function<void()> task;
+            Task task;
             {
-                std::unique_lock<std::mutex> lock(queue_mutex);
-                cv.wait(lock, [this] { return stop || !tasks.empty(); });
-                if(stop && tasks.empty()) return;
-                task = std::move(tasks.front());
-                tasks.pop();
+                std::unique_lock<std::mutex> lock(event_mutex);
+                if(event_variable.wait_for(lock, idle_time, [this] { return stop || !tasks.empty(); })) {
+                    if(stop && tasks.empty()) return;
+                    task = std::move(tasks.front());
+                    tasks.pop();
+                } else {
+                    if(workers.size() > num_core_threads) {
+                        auto thread_id = std::this_thread::get_id();
+                        auto it = std::find_if(workers.begin(), workers.end(), [&](std::thread &t) { return t.get_id() == thread_id; });
+                        if (it != workers.end()) {
+                            it->detach();
+                            workers.erase(it);
+                            return;
+                        }
+                    }
+                }
             }
-            task();
+            if (task) {
+                task();
+            }
         }
     }
 };
