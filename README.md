@@ -7,6 +7,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Double Linked List (C++)
 * Stack
   * Stack (C++)
+  * Lock Required Stack (C++)
   * Lock Free Stack (C++)
 * Queue
   * Queue (C++)
