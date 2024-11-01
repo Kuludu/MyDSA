@@ -49,6 +49,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
 * OS
   * Pointer
     * Shared Pointer (C++)
+    * Unique Pointer (C++)
   * Page Replacement
     * LRU (C++)
     * LFU (C++)
