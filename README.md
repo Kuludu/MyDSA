@@ -25,6 +25,8 @@ Simple implements of some DSA(Data Structure and Algorithm).
     * Dijkstra (C++)
   * Topo Sort
     * Kahn (C++)
+* Hash
+  * Hash Map (C++)
 * String
   * String (C++)
   * Trie (C++)
