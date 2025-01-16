@@ -1,3 +1,5 @@
+#pragma once
+
 template<typename U, typename V>
 class BinaryOperator {
 public:
