@@ -50,6 +50,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Least Common Multiple (C++)
   * Fibonacci (C++)
   * Square Root (C++)
+  * Natural Number Generator (C++20+)
 * OS
   * Pointer
     * Shared Pointer (C++)
@@ -65,3 +66,7 @@ Simple implements of some DSA(Data Structure and Algorithm).
   * Observer (C++)
   * Decorator (C++)
   * Strategy (C++)
+
+*** 
+
+Found a bug or error? Please let me know by opening an issue. Thanks for helping improve this project!
