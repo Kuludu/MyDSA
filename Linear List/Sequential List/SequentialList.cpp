@@ -4,7 +4,7 @@ using std::cout;
 
 class SequentialList {
 public:
-    SequentialList(int max_size) : max_size(max_size) {
+    SequentialList(int max_size) : max_size(max_size), length(0) {
         this->list = new int[max_size];
     }
 

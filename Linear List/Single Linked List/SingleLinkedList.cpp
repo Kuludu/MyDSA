@@ -4,8 +4,9 @@ using std::nullptr_t;
 
 class SingleLinkedList {
 public:
-    SingleLinkedList() {
+    SingleLinkedList() : length(0) {
         this->head = new Node();
+        this->head->next = nullptr;
     }
 
     ~SingleLinkedList() {
